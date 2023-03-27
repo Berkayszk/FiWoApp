@@ -2,6 +2,8 @@ package com.example.fiwoapp.api
 
 import com.example.fiwoapp.model.moviedetail.DetailsResponse
 import com.example.fiwoapp.model.popularmovie.PopularResponse
+import com.example.fiwoapp.model.popularpeople.PopularPeopleResponse
+import com.example.fiwoapp.model.tvdetail.TvDetailResponse
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.util.Constants.API_KEY
 import retrofit2.Response
@@ -16,16 +18,36 @@ interface ApiService {
     @GET("/3/movie/popular")
     suspend fun getPopularMovie(
         @Query("page") page : Int = Constants.STARTING_PAGE_INDEX,
-        @Query("api_key") api_key: String = Constants.API_KEY,
-        @Query("language") language : String = "en"
+        @Query("api_key") api_key: String = Constants.API_KEY
     ) : Response<PopularResponse>
 
-    @GET("movie/{movie_id}")
+    @GET("/3/movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
-        @Query("api_key") apiKey: String = API_KEY,
-        @Query("language") language: String = "en"
-    ): DetailsResponse
+        @Query("api_key") apiKey: String = Constants.API_KEY
+    ): Response<DetailsResponse>
 
+    @GET("/3/tv/popular")
+    suspend fun getTvSeries(
+        @Query("api_key") apiKey : String = Constants.API_KEY,
+        @Query("page") page : Int = Constants.STARTING_PAGE_INDEX
+    ) : Response<TvDetailResponse>
 
+    @GET("/3/tv/{tv_id}")
+    suspend fun getTvDetails(
+        @Query("tv_id") tvId:Int,
+        @Query("api_key") apiKey:String = Constants.API_KEY
+    ) : Response<TvDetailResponse>
+
+    @GET("/3/person/popular")
+    suspend fun getPopularPeople(
+        @Query("page") page : Int = Constants.STARTING_PAGE_INDEX,
+        @Query("api_key") api_key: String = Constants.API_KEY
+    ) : Response<PopularPeopleResponse>
+
+    @GET("/3/person/{person_id}")
+    suspend fun getPeopleDetails(
+        @Path("person_id") movieId: Int,
+        @Query("api_key") apiKey: String = Constants.API_KEY
+    ): Response<TvDetailResponse>
 }
