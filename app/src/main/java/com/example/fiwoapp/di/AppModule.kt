@@ -1,6 +1,7 @@
 package com.example.fiwoapp.di
 
 import com.example.fiwoapp.api.ApiService
+import com.example.fiwoapp.repo.MovieShowRepository
 import com.example.fiwoapp.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,12 @@ import javax.inject.Singleton
 object AppModule {
 
     @Provides
+    @Singleton
     fun provideBaseUrl() = Constants.BASE_URL
+
+    @Provides
+    @Singleton
+    fun provideImageBaseUrl() = Constants.IMAGE_BASE_UR
 
     @Provides
     @Singleton
@@ -25,5 +31,9 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun providePopularMovieRepository(apiService : ApiService) = MovieShowRepository(apiService)
 
 }
