@@ -16,8 +16,11 @@ class PopularMovieSource(private val apiService: ApiService) : PagingSource<Int,
         return try {
             val nextPage = params.key ?:1
             val popularMovie = apiService.getPopularMovie(nextPage)
+            val data = popularMovie.body()?.results?: emptyList()
+            val responseData = mutableListOf<com.example.fiwoapp.model.popularmovie.Result>()
+            responseData.addAll(data)
             LoadResult.Page(
-                data = popularMovie.body()!!.results,
+                data = responseData,
                 prevKey = if (nextPage==1) null else nextPage -1,
                 nextKey = if (popularMovie.body()!!.results.isEmpty()) null else popularMovie.body()!!.page +1
             )
