@@ -11,7 +11,7 @@ import com.example.fiwoapp.util.Constants
 
 class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularmovie.Result,PopularMovieAdapter.PopularMovieHolder>(
     diffCallBack) {
-   inner class PopularMovieHolder(val binding : PopularMovieRowBinding) : ViewHolder(binding.root)
+    class PopularMovieHolder(val binding : PopularMovieRowBinding) : ViewHolder(binding.root)
 
     companion object {
      val diffCallBack = object : DiffUtil.ItemCallback<com.example.fiwoapp.model.popularmovie.Result>(){
@@ -33,7 +33,7 @@ class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularm
         val currentItem = getItem(position)
         holder.binding.apply {
             movieName.text = currentItem!!.title
-            val imageLink = "${Constants.IMAGE_BASE_UR}/${currentItem?.poster_path}"
+            val imageLink = "${Constants.IMAGE_BASE_UR}+${currentItem.poster_path}"
             imageView.load(imageLink){
                 crossfade(true)
                 crossfade(100)

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.fiwoapp.R
 import com.example.fiwoapp.adapter.PopularMovieAdapter
 import com.example.fiwoapp.databinding.FragmentMovieBinding
@@ -28,7 +29,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentMovieBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -36,42 +37,33 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         loadingData()
-        setUpRV()
+        setUpRv()
     }
+
 
     private fun loadingData() {
-        println("data coming")
-        movieAdapter = PopularMovieAdapter()
-        lifecycleScope.launch {
-            println("lifecycle girdi")
-            viewModel.listData.collect { pagingData ->
-                println("collect içinde")
-                movieAdapter.submitData(pagingData)
-                println("adapter okudu kod bitti")
-                println("data success")
 
+            movieAdapter = PopularMovieAdapter()
+            lifecycleScope.launch {
+                viewModel.moviesList.collect { pagingData ->
+                    movieAdapter.submitData(pagingData)
+
+                }
             }
-        }
-
     }
-
-
-    private fun setUpRV() {
-        println("rv coming")
+    private fun setUpRv(){
         movieAdapter = PopularMovieAdapter()
         binding.recyclerView.apply {
 
+            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             adapter = movieAdapter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
-            println("rv showing")
         }
 
-
     }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

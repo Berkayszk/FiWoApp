@@ -51,14 +51,17 @@ dependencies {
 
     //Paging
     implementation "androidx.paging:paging-runtime-ktx:3.2.0-alpha04"
-
+    implementation 'androidx.paging:paging-common-ktx:3.1.1'
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.okhttp3:okhttp:4.10.0"
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.1"
     implementation 'com.squareup.retrofit2:converter-jackson:2.0.0'
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
+    //OkHttp Interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.1"
 
 
 

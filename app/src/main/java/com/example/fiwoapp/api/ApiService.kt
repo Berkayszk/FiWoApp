@@ -15,13 +15,14 @@ interface ApiService {
 
     //https://api.themoviedb.org/3/movie/popular?api_key=87be3a25620bfec5b2c45e1fd566b362&language=en-US&page=1
 
-    @GET("/3/movie/popular")
+    @GET("movie/popular")
     suspend fun getPopularMovie(
-        @Query("page") page : Int = Constants.STARTING_PAGE_INDEX,
-        @Query("api_key") api_key: String = Constants.API_KEY
+        @Query("api_key") api_key: String = API_KEY,
+        @Query("page") page : Int = Constants.STARTING_PAGE_INDEX
+
     ) : Response<PopularResponse>
 
-    @GET("/3/movie/{movie_id}")
+    @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = Constants.API_KEY
