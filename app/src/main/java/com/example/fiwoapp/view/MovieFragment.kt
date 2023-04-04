@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.fiwoapp.R
 import com.example.fiwoapp.adapter.PopularMovieAdapter
@@ -38,15 +39,13 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        loadingData()
         setUpRv()
+        loadingData()
+
     }
 
 
     private fun loadingData() {
-
-            movieAdapter = PopularMovieAdapter()
             lifecycleScope.launch {
                 viewModel.moviesList.collect { pagingData ->
                     movieAdapter.submitData(pagingData)
@@ -58,7 +57,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         movieAdapter = PopularMovieAdapter()
         binding.recyclerView.apply {
 
-            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             adapter = movieAdapter
             setHasFixedSize(true)
         }

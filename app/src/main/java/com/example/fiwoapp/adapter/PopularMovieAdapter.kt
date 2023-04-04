@@ -33,11 +33,15 @@ class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularm
         val currentItem = getItem(position)
         holder.binding.apply {
             movieName.text = currentItem!!.title
-            val imageLink = "${Constants.IMAGE_BASE_UR}+${currentItem.poster_path}"
+            val imageLink = "${Constants.IMAGE_BASE_UR}${currentItem.poster_path}"
+            val imageLinkBackground = "${Constants.IMAGE_BASE_UR}${currentItem.backdrop_path}"
             imageView.load(imageLink){
                 crossfade(true)
-                crossfade(100)
-
+                crossfade(1000)
+            }
+            imageViewPoster.load(imageLinkBackground){
+                crossfade(true)
+                crossfade(1000)
             }
         }
     }
