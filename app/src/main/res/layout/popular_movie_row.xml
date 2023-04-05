@@ -6,7 +6,7 @@
     android:layout_height="250dp"
     android:elevation="10dp"
     app:cardCornerRadius="15dp"
-    android:layout_margin="10dpdp"
+    android:layout_margin="10dp"
     android:padding="10dp"
 
     >
@@ -35,14 +35,21 @@
                 </ImageView>
 
 
-
-                <ImageView
-                    android:id="@+id/imageView"
+                <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
                     android:layout_height="120dp"
                     android:layout_marginTop="70dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@color/black"></ImageView>
+                    app:cardCornerRadius="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@color/black"></ImageView>
+
+                </androidx.cardview.widget.CardView>
+
 
             </RelativeLayout>
 

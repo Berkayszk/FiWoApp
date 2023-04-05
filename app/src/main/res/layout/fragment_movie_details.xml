@@ -1,14 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".view.MovieDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/imageDetailOriginal"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            tools:src="@tools:sample/avatars"
+            />
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="160dp"
+            app:cardCornerRadius="30dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginLeft="40dp">
+
+            <ImageView
+                android:id="@+id/imageViewPoster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="350dp">
+
+            <TextView
+                android:id="@+id/tagLineText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="test kkkjljlj"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:textColor="#7E7E7E" />
+
+            <TextView
+                android:id="@+id/movieName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="test kkkjljlj"
+                android:textSize="25sp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/releaseDate"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="test asdsadsaddsa"
+                    android:textSize="16sp"
+                    android:textColor="#F5F5F5" />
+
+                <ImageView
+                    android:id="@+id/studioPicture"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@color/white"></ImageView>
+
+
+                <TextView
+                    android:id="@+id/studioName"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="20th Studios Movie"
+                    android:gravity="center|right"
+                    android:textSize="12sp"
+                    android:textColor="#F5F5F5"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/releaseDateInfo"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test asdsadsaddsa"
+                android:textSize="13sp"
+                android:textColor="#808080" />
+
+            <TextView
+                android:id="@+id/subjectText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="slippery soap salesman channel primal male aggression into a shocking new form forming in every town, until an eccentric gets in the way and ignites an out-of-control spikjsdaljdaslsdalhsdahsdakhsadkshdasdısdhaıasdhasdhkjıashdıashdıuashdıusahdısdhuaıusadıushadıhusaduısdahusıdahısdahuısdahuısdahdsuıahsdıahuısauhsdahısahdıashduhsdıuhasdahsdısahdıushadıhsadıhasdıhsdaıhasdıhdısahdıashdısahıdsahıasdhral toward oblivion."
+                android:textSize="11sp"
+                android:layout_marginLeft="5dp"
+                android:textColor="#E2E5DE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="35dp"
+                >
+
+                <TextView
+                    android:id="@+id/runTimeText"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="pasdsadkjlsdajasdas"
+                    android:textColor="@color/white"></TextView>
+                <TextView
+                    android:id="@+id/voteText"
+                    android:layout_marginLeft="80dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Vote Number"
+                    android:textColor="@color/white"></TextView>
+                <TextView
+                    android:id="@+id/voteTextAll"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Vote Number"
+                    android:textColor="@color/white"></TextView>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                >
+
+                <TextView
+                    android:id="@+id/genreText"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="pasdsadkjlsdajasdas"
+                    android:textColor="@color/white"></TextView>
+                <TextView
+                    android:id="@+id/countryText"
+                    android:layout_marginLeft="120dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="pasdsadkjlsdajasdas"
+                    android:textColor="@color/white"></TextView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
