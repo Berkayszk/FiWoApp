@@ -7,6 +7,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
+import coil.size.Scale
 import com.example.fiwoapp.databinding.FragmentMovieBinding
 import com.example.fiwoapp.databinding.PopularMovieRowBinding
 import com.example.fiwoapp.util.Constants
@@ -42,16 +43,17 @@ class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularm
             imageView.load(imageLink){
                 crossfade(true)
                 crossfade(1000)
+
             }
             imageViewPoster.load(imageLinkBackground){
                 crossfade(true)
                 crossfade(1000)
+
             }
 
         }
         holder.itemView.setOnClickListener {
-            val id = 0
-            val direction = MovieFragmentDirections.actionMovieFragmentToMovieDetailsFragment(id)
+            val direction = MovieFragmentDirections.actionMovieFragmentToMovieDetailsFragment(currentItem!!.id)
             it.findNavController().navigate(direction)
         }
     }

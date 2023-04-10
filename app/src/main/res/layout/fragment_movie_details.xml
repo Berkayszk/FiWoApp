@@ -20,6 +20,7 @@
             android:id="@+id/imageDetailOriginal"
             android:layout_width="match_parent"
             android:layout_height="280dp"
+            android:scaleType="fitXY"
             tools:src="@tools:sample/avatars"
             />
         <androidx.cardview.widget.CardView
@@ -33,6 +34,7 @@
                 android:id="@+id/imageViewPoster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="fitXY"
                 android:src="@color/white" />
         </androidx.cardview.widget.CardView>
 

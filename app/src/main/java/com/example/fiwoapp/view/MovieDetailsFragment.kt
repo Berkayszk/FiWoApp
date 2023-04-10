@@ -32,16 +32,29 @@ class MovieDetailsFragment : Fragment() {
         _binding = FragmentMovieDetailsBinding.inflate(layoutInflater,container,false)
         return binding.root
 
-        movieId = args.id
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        movieId = args.movieId
+        if (movieId>0){
+            viewModel.loadDetailsMovie(movieId)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        showData()
+    }
+
+    private fun showData(){
         binding.apply {
             viewModel.detailsMovie.observe(viewLifecycleOwner) {
                 val moviePosterUrlOrg = Constants.IMAGE_BASE_OR + it.backdrop_path
                 val moviePosterUrl = Constants.IMAGE_BASE_UR+it.poster_path
-                val studioPicture = Constants.IMAGE_BASE_UR+it.production_companies.get(1).logo_path
+                val studioPicture = Constants.IMAGE_BASE_UR+it.production_companies.get(0).logo_path
                 imageDetailOriginal.load(moviePosterUrlOrg){
                     crossfade(true)
                     crossfade(1000)
@@ -57,21 +70,17 @@ class MovieDetailsFragment : Fragment() {
                     crossfade(1000)
                     scale(Scale.FILL)
                 }
-
                 tagLineText.text = it.tagline
                 movieName.text = it.title
                 releaseDate.text = it.release_date
                 releaseDateInfo.text = "${"Revenue: "+ it.revenue.toString()}"
+                studioName.text = it.production_companies.get(0).name
                 subjectText.text = it.overview
                 runTimeText.text = "${it.runtime.toString() +  "min"}"
-                genreText.text = it.genres.get(1).name
-                countryText.text = it.production_countries.get(1).name
+                genreText.text = it.genres.get(0).name
+                countryText.text = it.production_countries.get(0).name
                 voteText.text = it.vote_average.toString()
                 voteTextAll.text = it.vote_count.toString()
-
-
-
-
 
             }
         }
