@@ -79,7 +79,7 @@
                     android:textColor="#F5F5F5" />
 
                 <ImageView
-                    android:id="@+id/studioPicture"
+                    android:id="@+id/studioImageView"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="90dp"

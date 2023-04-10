@@ -2,12 +2,15 @@ package com.example.fiwoapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
+import com.example.fiwoapp.databinding.FragmentMovieBinding
 import com.example.fiwoapp.databinding.PopularMovieRowBinding
 import com.example.fiwoapp.util.Constants
+import com.example.fiwoapp.view.MovieFragmentDirections
 
 class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularmovie.Result,PopularMovieAdapter.PopularMovieHolder>(
     diffCallBack) {
@@ -24,6 +27,7 @@ class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularm
         }
     }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieHolder {
         return PopularMovieHolder(PopularMovieRowBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -43,6 +47,12 @@ class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularm
                 crossfade(true)
                 crossfade(1000)
             }
+
+        }
+        holder.itemView.setOnClickListener {
+            val id = 0
+            val direction = MovieFragmentDirections.actionMovieFragmentToMovieDetailsFragment(id)
+            it.findNavController().navigate(direction)
         }
     }
 }

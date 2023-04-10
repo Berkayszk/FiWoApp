@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class MovieShowRepository @Inject constructor(val apiService : ApiService){
 
-    /*
+    /* //Flow denemesi yapılmadı!!
       fun getPopularMovie() : Flow<PagingData<com.example.fiwoapp.model.popularmovie.Result>>{
         return Pager(config = PagingConfig(pageSize = NETWORK_PAGE_SIZE),
         pagingSourceFactory = {PopularMovieSource(apiService)}).flow
@@ -23,7 +23,6 @@ class MovieShowRepository @Inject constructor(val apiService : ApiService){
     companion object{
         const val NETWORK_PAGE_SIZE = 27
     }
-
      */
 
 

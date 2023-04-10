@@ -1,5 +1,6 @@
 package com.example.fiwoapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,20 +25,40 @@ class MovieViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    val loading = MutableLiveData<Boolean>()
+    val loadingDetails = MutableLiveData<Boolean>()
+
+    /* //Solution 1
+    private var _loadingDetails = MutableLiveData<DetailsResponse>()
+    val movieDetailsResponse : LiveData<DetailsResponse>
+    get() = _loadingDetails
+
+     */
 
     val moviesList = Pager(PagingConfig(1)) {
         PopularMovieSource(repository)
     }.flow.cachedIn(viewModelScope)
 
-    //Api
     val detailsMovie = MutableLiveData<DetailsResponse>()
-    fun loadDetailsMovie(id: Int) = viewModelScope.launch {
-        loading.postValue(true)
+    fun loadDetailsMovie(id : Int) = viewModelScope.launch {
+        loadingDetails.postValue(true)
         val response = repository.getMovieDetails(id)
-        if (response.isSuccessful) {
+        if (response.isSuccessful){
             detailsMovie.postValue(response.body())
         }
-        loading.postValue(false)
+        loadingDetails.postValue(false)
     }
+
+    //Solution 1
+    /*
+    fun loadDetailsMovie(id:Int) = viewModelScope.launch {
+        repository.getMovieDetails(id).let {
+            if (it.isSuccessful){
+                _loadingDetails.postValue(it.body())
+            }else{
+                Log.d("","getPeople: ${it.code()}")
+            }
+        }
+    }
+     */
+
 }
