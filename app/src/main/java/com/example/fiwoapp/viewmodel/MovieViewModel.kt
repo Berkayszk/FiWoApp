@@ -10,7 +10,9 @@ import com.example.fiwoapp.api.ApiService
 import com.example.fiwoapp.model.moviedetail.DetailsResponse
 import com.example.fiwoapp.model.popularmovie.PopularResponse
 import com.example.fiwoapp.model.popularmovie.Result
+import com.example.fiwoapp.model.tvdetail.TvDetailResponse
 import com.example.fiwoapp.paging.PopularMovieSource
+import com.example.fiwoapp.paging.PopularTvSeriesSource
 import com.example.fiwoapp.repo.MovieShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -26,6 +28,7 @@ class MovieViewModel @Inject constructor(
 
 
     val loadingDetails = MutableLiveData<Boolean>()
+    val loadingTvDetails = MutableLiveData<Boolean>()
 
     /* //Solution 1
     private var _loadingDetails = MutableLiveData<DetailsResponse>()
@@ -38,6 +41,10 @@ class MovieViewModel @Inject constructor(
         PopularMovieSource(repository)
     }.flow.cachedIn(viewModelScope)
 
+    val tvList = Pager(PagingConfig(1)){
+        PopularTvSeriesSource(repository)
+    }.flow.cachedIn(viewModelScope)
+
     val detailsMovie = MutableLiveData<DetailsResponse>()
     fun loadDetailsMovie(id : Int) = viewModelScope.launch {
         loadingDetails.postValue(true)
@@ -46,6 +53,16 @@ class MovieViewModel @Inject constructor(
             detailsMovie.postValue(response.body())
         }
         loadingDetails.postValue(false)
+    }
+
+    val detailsTv = MutableLiveData<TvDetailResponse>()
+    fun loadDetailsTv(id : Int) = viewModelScope.launch {
+        loadingTvDetails.postValue(true)
+        val response = repository.getPopularTvDetails(id)
+        if (response.isSuccessful){
+            detailsTv.postValue(response.body())
+        }
+        loadingTvDetails.postValue(false)
     }
 
     //Solution 1

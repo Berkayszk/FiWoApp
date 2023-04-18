@@ -7,15 +7,18 @@
 
     <fragment
         android:id="@+id/movieFragment"
-        android:name="com.example.fiwoapp.view.MovieFragment"
+        android:name="com.example.fiwoapp.view.popular.MovieFragment"
         android:label="MovieFragment" >
         <action
             android:id="@+id/action_movieFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_tvSeriesDetails"
+            app:destination="@id/tvSeriesDetails" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.example.fiwoapp.view.MovieDetailsFragment"
+        android:name="com.example.fiwoapp.view.popular.MovieDetailsFragment"
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details" >
         <action
@@ -23,6 +26,17 @@
             app:destination="@id/movieFragment" />
         <argument
             android:name="movieId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvSeriesDetails"
+        android:name="com.example.fiwoapp.view.popular.tvseries.TvSeriesDetails"
+        android:label="TvSeriesDetails" >
+        <action
+            android:id="@+id/action_tvSeriesDetails_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <argument
+            android:name="tvId"
             app:argType="integer" />
     </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.fiwoapp.view
+package com.example.fiwoapp.view.popular
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import coil.size.Scale
-import com.example.fiwoapp.R
 import com.example.fiwoapp.databinding.FragmentMovieDetailsBinding
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.viewmodel.MovieViewModel
@@ -83,6 +82,7 @@ class MovieDetailsFragment : Fragment() {
                 voteTextAll.text = it.vote_count.toString()
 
             }
+
         }
     }
 

@@ -11,9 +11,10 @@ import coil.size.Scale
 import com.example.fiwoapp.databinding.FragmentMovieBinding
 import com.example.fiwoapp.databinding.PopularMovieRowBinding
 import com.example.fiwoapp.util.Constants
-import com.example.fiwoapp.view.MovieFragmentDirections
+import com.example.fiwoapp.view.popular.MovieFragmentDirections
 
-class PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularmovie.Result,PopularMovieAdapter.PopularMovieHolder>(
+class
+PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularmovie.Result,PopularMovieAdapter.PopularMovieHolder>(
     diffCallBack) {
     class PopularMovieHolder(val binding : PopularMovieRowBinding) : ViewHolder(binding.root)
 
