@@ -38,6 +38,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
         setUpRv()
         loadingData()
+        loadingTvData()
 
     }
 
@@ -49,9 +50,11 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
                 }
             }
+    }
+    private fun loadingTvData(){
         lifecycleScope.launch {
-            viewModel.tvList.collect{pagingTvSeries ->
-                tvAdapter.submitData(pagingTvSeries)
+            viewModel.tvList.collect{pagingTv->
+                tvAdapter.submitData(pagingTv)
             }
         }
     }

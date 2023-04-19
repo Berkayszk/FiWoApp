@@ -37,11 +37,14 @@ class PopularTvAdapter : PagingDataAdapter<com.example.fiwoapp.model.populartv.R
             movieName.text = currentItem!!.name
             val imageLink = "${Constants.IMAGE_BASE_UR}${currentItem.poster_path}"
             val imageLinkBackground = "${Constants.IMAGE_BASE_UR}${currentItem.backdrop_path}"
+            /*
             imageView.load(imageLink){
                 crossfade(1000)
                 crossfade(true)
             }
-            imageViewPoster.load(imageLinkBackground){
+
+             */
+            imageViewPoster.load(imageLink){
                 crossfade(1000)
                 crossfade(true)
             }

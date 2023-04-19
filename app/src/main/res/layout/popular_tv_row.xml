@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="250dp"
+    android:layout_height="230dp"
     android:elevation="10dp"
     app:cardCornerRadius="15dp"
-    android:layout_margin="10dp"
-    android:padding="8dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginLeft="2dp"
+    android:padding="10dp"
 
     >
 
 
-    <LinearLayout
+    <RelativeLayout
 
-        android:layout_width="180dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -30,26 +32,11 @@
                 android:id="@+id/imageViewPoster"
                 android:scaleType="fitXY"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
                 tools:srcCompat="@tools:sample/avatars">
             </ImageView>
 
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="90dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginLeft="10dp"
-                app:cardCornerRadius="20dp">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:scaleType="fitXY"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@color/black"></ImageView>
-
-            </androidx.cardview.widget.CardView>
 
 
         </RelativeLayout>
@@ -59,12 +46,35 @@
             android:id="@+id/movieName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="190dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="TextView"
+            android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="TextView" />
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="155dp"
+            android:text="(*)7.3"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="155dp"
+            android:text="2021"
+            android:textColor="#D5D3D3"
+            android:textSize="13sp" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

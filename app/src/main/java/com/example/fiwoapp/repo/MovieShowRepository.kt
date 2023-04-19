@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.fiwoapp.api.ApiService
 import com.example.fiwoapp.paging.PopularMovieSource
+import com.example.fiwoapp.util.Constants.API_KEY
 import com.example.fiwoapp.viewmodel.MovieViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -26,10 +27,10 @@ class MovieShowRepository @Inject constructor(val apiService : ApiService){
      */
 
 
-   suspend fun getPopularMovie(page : Int) = apiService.getPopularMovie()
+   suspend fun getPopularMovie(page : Int) = apiService.getPopularMovie(API_KEY,page)
    suspend fun getMovieDetails(movieId:Int) = apiService.getMovieDetails(movieId)
 
-   suspend fun getPopularTv(page: Int) = apiService.getTvSeries()
+   suspend fun getPopularTv(page: Int) = apiService.getTvSeries(API_KEY,page)
    suspend fun getPopularTvDetails(tvId : Int) = apiService.getTvDetails(tvId)
 
 }
