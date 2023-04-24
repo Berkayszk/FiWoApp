@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/tvSeriesDetails"
-        android:name="com.example.fiwoapp.view.popular.tvseries.TvSeriesDetails"
+        android:name="com.example.fiwoapp.view.tvseries.TvSeriesDetails"
         android:label="TvSeriesDetails" >
         <action
             android:id="@+id/action_tvSeriesDetails_to_movieFragment"

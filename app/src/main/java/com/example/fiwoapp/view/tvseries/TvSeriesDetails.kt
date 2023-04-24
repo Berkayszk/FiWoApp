@@ -1,4 +1,4 @@
-package com.example.fiwoapp.view.popular.tvseries
+package com.example.fiwoapp.view.tvseries
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +14,7 @@ import com.example.fiwoapp.adapter.PopularTvAdapter
 import com.example.fiwoapp.databinding.FragmentTvSeriesDetailsBinding
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.view.popular.MovieDetailsFragmentArgs
+import com.example.fiwoapp.view.popular.tvseries.TvSeriesDetailsArgs
 import com.example.fiwoapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

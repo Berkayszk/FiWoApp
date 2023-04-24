@@ -11,8 +11,7 @@ import com.example.fiwoapp.model.moviedetail.DetailsResponse
 import com.example.fiwoapp.model.popularmovie.PopularResponse
 import com.example.fiwoapp.model.popularmovie.Result
 import com.example.fiwoapp.model.tvdetail.TvDetailResponse
-import com.example.fiwoapp.paging.PopularMovieSource
-import com.example.fiwoapp.paging.PopularTvSeriesSource
+import com.example.fiwoapp.paging.*
 import com.example.fiwoapp.repo.MovieShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -44,6 +43,18 @@ class MovieViewModel @Inject constructor(
     val tvList = Pager(PagingConfig(1)){
         PopularTvSeriesSource(repository)
     }.flow.cachedIn(viewModelScope)
+
+    val peopleList = Pager(PagingConfig(1)){
+        PopularPeopleSource(repository)
+    }.flow.cachedIn(viewModelScope)
+
+    val tvSimilarList = Pager(PagingConfig(1)){
+        SimilarTvSource(repository)
+    }.flow.cachedIn(viewModelScope)
+    val movieSimilarList = Pager(PagingConfig(1)){
+        SimilarMovieSource(repository)
+    }.flow.cachedIn(viewModelScope)
+
 
     val detailsMovie = MutableLiveData<DetailsResponse>()
     fun loadDetailsMovie(id : Int) = viewModelScope.launch {

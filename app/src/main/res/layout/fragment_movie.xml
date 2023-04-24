@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Popular Movies"
+            android:text="Trend Movies"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="10dp"
@@ -42,6 +42,25 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popularTvRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Best of Actors"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:textColor="@color/white">
+        </TextView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popularPeople"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

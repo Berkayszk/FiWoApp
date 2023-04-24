@@ -4,6 +4,8 @@ import com.example.fiwoapp.model.moviedetail.DetailsResponse
 import com.example.fiwoapp.model.popularmovie.PopularResponse
 import com.example.fiwoapp.model.popularpeople.PopularPeopleResponse
 import com.example.fiwoapp.model.populartv.PopularTvResponse
+import com.example.fiwoapp.model.similarmovie.SimilarMovieResponse
+import com.example.fiwoapp.model.similartv.SimilarTvResponse
 import com.example.fiwoapp.model.tvdetail.TvDetailResponse
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.util.Constants.API_KEY
@@ -29,6 +31,13 @@ interface ApiService {
         @Query("api_key") apiKey: String = Constants.API_KEY
     ): Response<DetailsResponse>
 
+    @GET("movie/{movie_id}/similar")
+    suspend fun getMovieSimilar(
+        @Path("movie_id") movieId : Int,
+        @Query("api_key") apiKey: String = Constants.API_KEY
+    ) : Response<SimilarMovieResponse>
+
+
     @GET("/3/tv/top_rated")
     suspend fun getTvSeries(
         @Query("api_key") apiKey : String = Constants.API_KEY,
@@ -40,6 +49,13 @@ interface ApiService {
         @Path("tv_id") tvId:Int,
         @Query("api_key") apiKey:String = Constants.API_KEY
     ) : Response<TvDetailResponse>
+
+    @GET("tv/{tv_id}/similar")
+    suspend fun getSimilarTv(
+        @Path("tv_id") tvId: Int,
+        @Query("api_key") apiKey: String = Constants.API_KEY
+    ) : Response<SimilarTvResponse>
+
 
     @GET("/3/person/popular")
     suspend fun getPopularPeople(

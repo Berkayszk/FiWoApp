@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fiwoapp.R
 import com.example.fiwoapp.adapter.PopularMovieAdapter
+import com.example.fiwoapp.adapter.PopularPeopleAdapter
 import com.example.fiwoapp.adapter.PopularTvAdapter
 import com.example.fiwoapp.databinding.FragmentMovieBinding
 import com.example.fiwoapp.viewmodel.MovieViewModel
@@ -24,6 +25,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     private val viewModel: MovieViewModel by viewModels()
     private lateinit var movieAdapter: PopularMovieAdapter
     private lateinit var tvAdapter : PopularTvAdapter
+    private lateinit var peopleAdapter : PopularPeopleAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +40,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
         setUpRv()
         loadingData()
-        loadingTvData()
+
 
     }
 
@@ -50,29 +52,35 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
                 }
             }
-    }
-    private fun loadingTvData(){
         lifecycleScope.launch {
             viewModel.tvList.collect{pagingTv->
                 tvAdapter.submitData(pagingTv)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.peopleList.collect{pagingPeople->
+                peopleAdapter.submitData(pagingPeople)
             }
         }
     }
     private fun setUpRv(){
         movieAdapter = PopularMovieAdapter()
         tvAdapter = PopularTvAdapter()
+        peopleAdapter = PopularPeopleAdapter()
         binding.popularMovieRv.apply {
 
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             adapter = movieAdapter
             setHasFixedSize(true)
         }
-
-
-
         binding.popularTvRv.apply {
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             adapter = tvAdapter
+            setHasFixedSize(true)
+        }
+        binding.popularPeople.apply {
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            adapter = peopleAdapter
             setHasFixedSize(true)
         }
 
