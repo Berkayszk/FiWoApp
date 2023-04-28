@@ -6,24 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.size.Scale
 import com.example.fiwoapp.R
-import com.example.fiwoapp.adapter.PopularTvAdapter
+import com.example.fiwoapp.adapter.SimilarTvAdapter
 import com.example.fiwoapp.databinding.FragmentTvSeriesDetailsBinding
 import com.example.fiwoapp.util.Constants
-import com.example.fiwoapp.view.popular.MovieDetailsFragmentArgs
-import com.example.fiwoapp.view.popular.tvseries.TvSeriesDetailsArgs
+
 import com.example.fiwoapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
     private var _binding: FragmentTvSeriesDetailsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var tvAdapter: PopularTvAdapter
     private var tvId = 0
+    private lateinit var similarTvAdapter: SimilarTvAdapter
     private val args : TvSeriesDetailsArgs by navArgs()
     private val viewModel: MovieViewModel by viewModels()
 
@@ -47,8 +50,19 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        similarTvRv()
         showData()
+        loadingSimilarData()
 
+
+    }
+    private fun loadingSimilarData(){
+        similarTvAdapter = SimilarTvAdapter()
+        lifecycleScope.launch {
+            viewModel.tvSimilarList.collect{pagingData->
+                similarTvAdapter.submitData(pagingData)
+            }
+        }
     }
 
     private fun showData() {
@@ -88,6 +102,15 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
         }
 
     }
+    private fun similarTvRv(){
+        similarTvAdapter = SimilarTvAdapter()
+        binding.similarTvRv.apply {
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            adapter = similarTvAdapter
+            setHasFixedSize(true)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

@@ -193,7 +193,7 @@
                 android:layout_margin="10dp"
                 android:text="Similar Movies"
                 android:textSize="24sp"
-                android:textColor="@color/white"></TextView>
+                android:textColor="@color/white" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/similarMovieRv"

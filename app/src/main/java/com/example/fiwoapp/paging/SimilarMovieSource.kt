@@ -14,7 +14,7 @@ class SimilarMovieSource(private val repository: MovieShowRepository) : PagingSo
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         return try {
             val currentPage = params.key ?:1
-            val response = repository.getMovieSimilar(currentPage)
+            val response = repository.getMovieSimilar(3,currentPage)
             val data = response.body()!!.results
             val responseData = mutableListOf<com.example.fiwoapp.model.similarmovie.Result>()
             responseData.addAll(data)

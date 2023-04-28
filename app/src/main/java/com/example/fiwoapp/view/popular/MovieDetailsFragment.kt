@@ -6,13 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.size.Scale
+import com.example.fiwoapp.adapter.SimilarMovieAdapter
 import com.example.fiwoapp.databinding.FragmentMovieDetailsBinding
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
@@ -22,6 +27,7 @@ class MovieDetailsFragment : Fragment() {
     private var movieId = 0
     private val viewModel: MovieViewModel by viewModels()
     private val args : MovieDetailsFragmentArgs by navArgs()
+    private lateinit var similarMovieAdapter : SimilarMovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +51,21 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        similarMovieRv()
+        loadingSimilarData()
         showData()
+
+
+    }
+
+    private fun loadingSimilarData(){
+        similarMovieAdapter = SimilarMovieAdapter()
+        lifecycleScope.launch {
+            viewModel.movieSimilarList.collect{pagingData->
+                similarMovieAdapter.submitData(pagingData)
+            }
+        }
+
     }
 
     private fun showData(){
@@ -86,9 +106,19 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
+    private fun similarMovieRv(){
+        val similarMovieAdapter = SimilarMovieAdapter()
+        binding.similarMovieRv.apply {
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            adapter = similarMovieAdapter
+            setHasFixedSize(true)
+
+        }
+    }
+
+
 
     override fun onDestroy() {
-
         super.onDestroy()
         _binding=null
     }

@@ -14,7 +14,7 @@ class SimilarTvSource(private val repository: MovieShowRepository) : PagingSourc
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         return try {
             val currentPage = params.key ?:1
-            val response = repository.getTvSimilar(currentPage)
+            val response = repository.getTvSimilar(6,currentPage)
             val data = response.body()!!.results
             val responseData = mutableListOf<com.example.fiwoapp.model.similartv.Result>()
             responseData.addAll(data)

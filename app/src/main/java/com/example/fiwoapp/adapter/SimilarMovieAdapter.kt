@@ -14,7 +14,7 @@ import com.example.fiwoapp.model.similarmovie.SimilarMovieResponse
 import com.example.fiwoapp.repo.MovieShowRepository
 import com.example.fiwoapp.util.Constants
 
-class SimilarMovieAdapter(private val repository: MovieShowRepository) : PagingDataAdapter<com.example.fiwoapp.model.similarmovie.Result,SimilarMovieAdapter.SimilarMovieViewHolder>(
+class SimilarMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.similarmovie.Result,SimilarMovieAdapter.SimilarMovieViewHolder>(
     diffCallBack) {
     class SimilarMovieViewHolder(val binding : PopularMovieRowBinding): ViewHolder(binding.root)
 

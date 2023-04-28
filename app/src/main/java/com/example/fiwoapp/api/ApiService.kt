@@ -34,6 +34,7 @@ interface ApiService {
     @GET("movie/{movie_id}/similar")
     suspend fun getMovieSimilar(
         @Path("movie_id") movieId : Int,
+        @Query("page") page : Int,
         @Query("api_key") apiKey: String = Constants.API_KEY
     ) : Response<SimilarMovieResponse>
 
@@ -53,6 +54,7 @@ interface ApiService {
     @GET("tv/{tv_id}/similar")
     suspend fun getSimilarTv(
         @Path("tv_id") tvId: Int,
+        @Query("page") page : Int,
         @Query("api_key") apiKey: String = Constants.API_KEY
     ) : Response<SimilarTvResponse>
 

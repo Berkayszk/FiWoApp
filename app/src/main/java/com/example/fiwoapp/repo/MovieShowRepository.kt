@@ -35,7 +35,7 @@ class MovieShowRepository @Inject constructor(val apiService : ApiService){
 
    suspend fun getPopularPeople(page : Int) = apiService.getPopularPeople(page)
 
-   suspend fun getMovieSimilar(page: Int) = apiService.getMovieSimilar(page)
-   suspend fun getTvSimilar(page: Int) = apiService.getSimilarTv(page)
+   suspend fun getMovieSimilar(page: Int,movieId: Int) = apiService.getMovieSimilar(page,movieId)
+   suspend fun getTvSimilar(page: Int,tvId: Int) = apiService.getSimilarTv(page,tvId)
 
 }
