@@ -6,7 +6,7 @@ import com.example.fiwoapp.model.similartv.Result
 import com.example.fiwoapp.repo.MovieShowRepository
 import retrofit2.HttpException
 
-class SimilarTvSource(private val repository: MovieShowRepository) : PagingSource<Int,com.example.fiwoapp.model.similartv.Result>() {
+class SimilarTvSource(private val repository: MovieShowRepository,private var tvId:Int) : PagingSource<Int,com.example.fiwoapp.model.similartv.Result>() {
     override fun getRefreshKey(state: PagingState<Int, Result>): Int? {
         return null
     }
@@ -14,7 +14,7 @@ class SimilarTvSource(private val repository: MovieShowRepository) : PagingSourc
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         return try {
             val currentPage = params.key ?:1
-            val response = repository.getTvSimilar(6,currentPage)
+            val response = repository.getTvSimilar(tvId,currentPage)
             val data = response.body()!!.results
             val responseData = mutableListOf<com.example.fiwoapp.model.similartv.Result>()
             responseData.addAll(data)

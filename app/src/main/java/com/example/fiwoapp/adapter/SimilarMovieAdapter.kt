@@ -34,7 +34,7 @@ class SimilarMovieAdapter : PagingDataAdapter<Result,SimilarMovieAdapter.Similar
     override fun onBindViewHolder(holder: SimilarMovieViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.binding.apply {
-            val imageLinkBackground = "${Constants.IMAGE_BASE_UR}${currentItem!!.poster_path}"
+            val imageLinkBackground = "${Constants.IMAGE_BASE_OR}${currentItem!!.poster_path}"
             imageViewPoster.load(imageLinkBackground){
                 crossfade(1000)
                 crossfade(true)

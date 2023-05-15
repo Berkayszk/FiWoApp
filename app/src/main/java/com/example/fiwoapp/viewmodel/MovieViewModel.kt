@@ -22,13 +22,21 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val repository: MovieShowRepository,
-    private val apiService: ApiService
+    private val apiService: ApiService,
 ) : ViewModel() {
 
-
+    private var movieId: Int = 0
+    private var tvId : Int = 0
     val loadingDetails = MutableLiveData<Boolean>()
     val loadingTvDetails = MutableLiveData<Boolean>()
 
+
+    fun setMovieId(Id : Int){
+        movieId = Id
+    }
+    fun setTvId(Id: Int){
+        tvId=Id
+    }
     /* //Solution 1
     private var _loadingDetails = MutableLiveData<DetailsResponse>()
     val movieDetailsResponse : LiveData<DetailsResponse>
@@ -49,10 +57,10 @@ class MovieViewModel @Inject constructor(
     }.flow.cachedIn(viewModelScope)
 
     val tvSimilarList = Pager(PagingConfig(1)){
-        SimilarTvSource(repository)
+        SimilarTvSource(repository,tvId)
     }.flow.cachedIn(viewModelScope)
     val movieSimilarList = Pager(PagingConfig(1)){
-        SimilarMovieSource(repository)
+        SimilarMovieSource(repository,movieId)
     }.flow.cachedIn(viewModelScope)
 
 

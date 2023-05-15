@@ -45,6 +45,7 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
         if (tvId>0){
             viewModel.loadDetailsTv(tvId)
         }
+        viewModel.setTvId(tvId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,7 +58,6 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
 
     }
     private fun loadingSimilarData(){
-        similarTvAdapter = SimilarTvAdapter()
         lifecycleScope.launch {
             viewModel.tvSimilarList.collect{pagingData->
                 similarTvAdapter.submitData(pagingData)
@@ -105,8 +105,8 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
     private fun similarTvRv(){
         similarTvAdapter = SimilarTvAdapter()
         binding.similarTvRv.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             adapter = similarTvAdapter
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
         }
     }

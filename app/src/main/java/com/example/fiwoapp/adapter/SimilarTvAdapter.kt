@@ -31,7 +31,7 @@ class SimilarTvAdapter: PagingDataAdapter<com.example.fiwoapp.model.similartv.Re
     override fun onBindViewHolder(holder: SimilarTvViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.binding.apply {
-            val imageLinkBackground = "${Constants.IMAGE_BASE_UR}${currentItem!!.backdrop_path}"
+            val imageLinkBackground = "${Constants.IMAGE_BASE_OR}${currentItem!!.backdrop_path}"
             imageViewPoster.load(imageLinkBackground) {
                 crossfade(1000)
                 crossfade(true)

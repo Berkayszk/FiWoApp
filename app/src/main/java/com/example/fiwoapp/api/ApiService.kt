@@ -31,7 +31,7 @@ interface ApiService {
         @Query("api_key") apiKey: String = Constants.API_KEY
     ): Response<DetailsResponse>
 
-    @GET("movie/{movie_id}/similar")
+    @GET("movie/{movie_id}/recommendations")
     suspend fun getMovieSimilar(
         @Path("movie_id") movieId : Int,
         @Query("page") page : Int,
@@ -51,7 +51,7 @@ interface ApiService {
         @Query("api_key") apiKey:String = Constants.API_KEY
     ) : Response<TvDetailResponse>
 
-    @GET("tv/{tv_id}/similar")
+    @GET("tv/{tv_id}/recommendations")
     suspend fun getSimilarTv(
         @Path("tv_id") tvId: Int,
         @Query("page") page : Int,

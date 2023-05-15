@@ -16,7 +16,12 @@ class PopularMovieSource(private val repository: MovieShowRepository) : PagingSo
             val response = repository.getPopularMovie(currentPage)
             val data = response.body()!!.results
             val responseData = mutableListOf<Result>()
+            if (data.isEmpty()) {
+                return LoadResult.Error(Exception("No Movies"))
+            }
             responseData.addAll(data)
+
+
 
             LoadResult.Page(
                 data = responseData,

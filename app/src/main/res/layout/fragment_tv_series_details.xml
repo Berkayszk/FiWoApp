@@ -37,6 +37,29 @@
                     android:scaleType="fitXY"
                     android:src="@color/white" />
             </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="690dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:text="Similar Movies"
+                    android:textSize="24sp"
+                    android:textColor="@color/white" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/similarMovieRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,7 +71,7 @@
                     android:id="@+id/tagLineText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="test kkkjljlj"
+                    android:text="Tagline Text Test"
                     android:textSize="15sp"
                     android:textStyle="italic"
                     android:gravity="center"
@@ -59,7 +82,7 @@
                     android:id="@+id/movieName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="test kkkjljlj"
+                    android:text="Movie Name "
                     android:textSize="25sp"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/white" />
@@ -72,11 +95,11 @@
                     <TextView
                         android:id="@+id/releaseDate"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="2dp"
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="test asdsadsaddsa"
+                        android:text="Release Date"
                         android:textSize="16sp"
                         android:textColor="#F5F5F5" />
 
@@ -92,7 +115,7 @@
                     <TextView
                         android:id="@+id/studioName"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="2dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="20th Studios Movie"
@@ -105,7 +128,7 @@
                 <TextView
                     android:id="@+id/releaseDateInfo"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Overview"
@@ -122,6 +145,7 @@
                     android:layout_marginLeft="5dp"
                     android:textColor="#E2E5DE" />
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -134,7 +158,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="pasdsadkjlsdajasdas"
+                        android:text="Run Time"
                         android:textColor="@color/white"></TextView>
                     <TextView
                         android:id="@+id/voteText"
@@ -165,44 +189,20 @@
                         android:layout_marginLeft="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="pasdsadkjlsdajasdas"
+                        android:text="Genre"
                         android:textColor="@color/white"></TextView>
                     <TextView
                         android:id="@+id/countryText"
                         android:layout_marginLeft="120dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="pasdsadkjlsdajasdas"
+                        android:text="Country Text"
                         android:textColor="@color/white"></TextView>
 
 
                 </LinearLayout>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="690dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:text="Similar Tv Series"
-                    android:textSize="24sp"
-                    android:textColor="@color/white"></TextView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/similarTvRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-            </LinearLayout>
         </RelativeLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

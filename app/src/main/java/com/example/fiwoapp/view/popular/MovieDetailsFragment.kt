@@ -46,6 +46,7 @@ class MovieDetailsFragment : Fragment() {
         if (movieId>0){
             viewModel.loadDetailsMovie(movieId)
         }
+        viewModel.setMovieId(movieId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,18 +59,24 @@ class MovieDetailsFragment : Fragment() {
 
     }
 
-    private fun loadingSimilarData(){
+    private fun similarMovieRv(){
         similarMovieAdapter = SimilarMovieAdapter()
+        binding.similarMovieRv.apply {
+            adapter = similarMovieAdapter
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            setHasFixedSize(true)
+        }
+    }
+    private fun loadingSimilarData(){
         lifecycleScope.launch {
             viewModel.movieSimilarList.collect{pagingData->
+
                 similarMovieAdapter.submitData(pagingData)
             }
         }
 
     }
-    private fun showDataSimilar(){
 
-    }
 
     private fun showData(){
         binding.apply {
@@ -94,38 +101,23 @@ class MovieDetailsFragment : Fragment() {
                 }
                 tagLineText.text = it.tagline
                 movieName.text = it.title
-                releaseDate.text = it.release_date
+                releaseDate.text = "${"Release Date: "+ it.release_date + " ," +it.production_countries.get(0).name}"
                 releaseDateInfo.text = "${"Revenue: "+ it.revenue.toString()}"
                 studioName.text = it.production_companies.get(0).name
                 subjectText.text = it.overview
                 runTimeText.text = "${it.runtime.toString() +  "min"}"
                 genreText.text = it.genres.get(0).name
-                countryText.text = it.production_countries.get(0).name
-                voteText.text = it.vote_average.toString()
-                voteTextAll.text = it.vote_count.toString()
+                countryText.text = "${"Made "+ it.production_countries.get(0).name}"
+                voteText.text = "${"IMDB: "+ it.vote_average.toString()}"
+                voteTextAll.text = "${"Vote: "+it.vote_count.toString()}"
 
             }
 
         }
     }
 
-    private fun similarMovieRv(){
-        val similarMovieAdapter = SimilarMovieAdapter()
-        binding.similarMovieRv.apply {
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-            adapter = similarMovieAdapter
-            setHasFixedSize(true)
-
-        }
-
-
-    }
-
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding=null
     }
-
 }
