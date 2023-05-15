@@ -67,6 +67,9 @@ class MovieDetailsFragment : Fragment() {
         }
 
     }
+    private fun showDataSimilar(){
+
+    }
 
     private fun showData(){
         binding.apply {
@@ -114,6 +117,8 @@ class MovieDetailsFragment : Fragment() {
             setHasFixedSize(true)
 
         }
+
+
     }
 
 

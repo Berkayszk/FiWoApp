@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import com.example.fiwoapp.databinding.PopularMovieRowBinding
+import com.example.fiwoapp.databinding.PopularTvRowBinding
 import com.example.fiwoapp.model.similarmovie.Result
 import com.example.fiwoapp.model.similarmovie.SimilarMovieResponse
 import com.example.fiwoapp.repo.MovieShowRepository
 import com.example.fiwoapp.util.Constants
 
-class SimilarMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.similarmovie.Result,SimilarMovieAdapter.SimilarMovieViewHolder>(
-    diffCallBack) {
-    class SimilarMovieViewHolder(val binding : PopularMovieRowBinding): ViewHolder(binding.root)
+class SimilarMovieAdapter : PagingDataAdapter<Result,SimilarMovieAdapter.SimilarMovieViewHolder>(diffCallBack) {
+    class SimilarMovieViewHolder(val binding : PopularTvRowBinding): ViewHolder(binding.root)
 
     companion object{
         val diffCallBack = object : DiffUtil.ItemCallback<com.example.fiwoapp.model.similarmovie.Result>(){
@@ -39,11 +39,13 @@ class SimilarMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.similarm
                 crossfade(1000)
                 crossfade(true)
             }
+            movieName.text = currentItem.title
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarMovieViewHolder {
-        return SimilarMovieViewHolder(PopularMovieRowBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return SimilarMovieViewHolder(PopularTvRowBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
 }
