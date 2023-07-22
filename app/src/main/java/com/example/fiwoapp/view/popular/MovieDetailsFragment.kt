@@ -51,33 +51,13 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        similarMovieAdapter = SimilarMovieAdapter()
         similarMovieRv()
         loadingSimilarData()
         showData()
 
 
     }
-
-    private fun similarMovieRv(){
-        similarMovieAdapter = SimilarMovieAdapter()
-        binding.similarMovieRv.apply {
-            adapter = similarMovieAdapter
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-            setHasFixedSize(true)
-        }
-    }
-    private fun loadingSimilarData(){
-        lifecycleScope.launch {
-            viewModel.movieSimilarList.collect{pagingData->
-
-                similarMovieAdapter.submitData(pagingData)
-            }
-        }
-
-    }
-
-
     private fun showData(){
         binding.apply {
             viewModel.detailsMovie.observe(viewLifecycleOwner) {
@@ -114,6 +94,22 @@ class MovieDetailsFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun similarMovieRv(){
+            binding.similarMovieRv.apply {
+            adapter = similarMovieAdapter
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            setHasFixedSize(true)
+        }
+    }
+    private fun loadingSimilarData(){
+        lifecycleScope.launch {
+            viewModel.movieSimilarList.collect{pagingData->
+                similarMovieAdapter.submitData(pagingData)
+            }
+        }
+
     }
 
     override fun onDestroy() {

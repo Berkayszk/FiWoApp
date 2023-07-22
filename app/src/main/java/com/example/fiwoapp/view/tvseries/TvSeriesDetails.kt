@@ -57,13 +57,7 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
 
 
     }
-    private fun loadingSimilarData(){
-        lifecycleScope.launch {
-            viewModel.tvSimilarList.collect{pagingData->
-                similarTvAdapter.submitData(pagingData)
-            }
-        }
-    }
+
 
     private fun showData() {
         binding.apply {
@@ -108,6 +102,14 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
             adapter = similarTvAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
+        }
+    }
+
+    private fun loadingSimilarData(){
+        lifecycleScope.launch {
+            viewModel.tvSimilarList.collect{pagingData->
+                similarTvAdapter.submitData(pagingData)
+            }
         }
     }
 

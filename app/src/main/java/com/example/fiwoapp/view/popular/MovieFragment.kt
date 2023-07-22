@@ -26,6 +26,94 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     private lateinit var movieAdapter: PopularMovieAdapter
     private lateinit var tvAdapter : PopularTvAdapter
     private lateinit var peopleAdapter : PopularPeopleAdapter
+    private var movieLoaded = false
+    private var tvLoaded = false
+    private var peopleLoaded = false
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMovieBinding.inflate(layoutInflater, container, false)
+        return binding.root
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpRv()
+        loadingData()
+
+    }
+
+    private fun loadingData() {
+        lifecycleScope.launch {
+            viewModel.moviesList.collect { pagingData ->
+                movieAdapter.submitData(pagingData)
+                movieLoaded = true
+
+
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.tvList.collect { pagingTv ->
+                tvAdapter.submitData(pagingTv)
+                tvLoaded = true
+
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.peopleList.collect { pagingPeople ->
+                peopleAdapter.submitData(pagingPeople)
+                peopleLoaded = true
+
+            }
+        }
+    }
+
+
+
+    private fun setUpRv(){
+        movieAdapter = PopularMovieAdapter()
+        tvAdapter = PopularTvAdapter()
+        peopleAdapter = PopularPeopleAdapter()
+        binding.popularMovieRv.apply {
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            adapter = movieAdapter
+            setHasFixedSize(true)
+        }
+        binding.popularTvRv.apply {
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            adapter = tvAdapter
+            setHasFixedSize(true)
+        }
+        binding.popularPeople.apply {
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            adapter = peopleAdapter
+            setHasFixedSize(true)
+        }
+
+
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+}
+
+/*
+class MovieFragment : Fragment(R.layout.fragment_movie) {
+
+    private var _binding: FragmentMovieBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: MovieViewModel by viewModels()
+    private lateinit var movieAdapter: PopularMovieAdapter
+    private lateinit var tvAdapter : PopularTvAdapter
+    private lateinit var peopleAdapter : PopularPeopleAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +126,9 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        movieAdapter = PopularMovieAdapter()
+        tvAdapter = PopularTvAdapter()
+        peopleAdapter = PopularPeopleAdapter()
         setUpRv()
         loadingData()
 
@@ -46,12 +137,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
 
     private fun loadingData() {
-            lifecycleScope.launch {
-                viewModel.moviesList.collect { pagingData ->
-                    movieAdapter.submitData(pagingData)
 
-                }
-            }
         lifecycleScope.launch {
             viewModel.tvList.collect{pagingTv->
                 tvAdapter.submitData(pagingTv)
@@ -64,9 +150,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         }
     }
     private fun setUpRv(){
-        movieAdapter = PopularMovieAdapter()
-        tvAdapter = PopularTvAdapter()
-        peopleAdapter = PopularPeopleAdapter()
+
         binding.popularMovieRv.apply {
 
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -91,3 +175,5 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
     }
 
 }
+
+ */

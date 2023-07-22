@@ -58,4 +58,5 @@ PopularMovieAdapter : PagingDataAdapter<com.example.fiwoapp.model.popularmovie.R
             it.findNavController().navigate(direction)
         }
     }
+
 }

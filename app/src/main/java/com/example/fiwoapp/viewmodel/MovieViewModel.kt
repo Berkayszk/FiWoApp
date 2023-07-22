@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
+import com.example.fiwoapp.adapter.SimilarMovieAdapter
+import com.example.fiwoapp.adapter.SimilarTvAdapter
 import com.example.fiwoapp.api.ApiService
 import com.example.fiwoapp.model.moviedetail.DetailsResponse
 import com.example.fiwoapp.model.popularmovie.PopularResponse
@@ -20,6 +22,80 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
+class MovieViewModel @Inject constructor(
+    private val repository: MovieShowRepository,
+    private val apiService: ApiService,
+) : ViewModel() {
+
+    private var movieId: Int = 0
+    private var tvId : Int = 0
+    val loadingDetails = MutableLiveData<Boolean>()
+    val loadingTvDetails = MutableLiveData<Boolean>()
+
+    fun setMovieId(Id : Int){
+        movieId = Id
+    }
+    fun setTvId(Id: Int){
+        tvId=Id
+    }
+
+    val moviesList = Pager(PagingConfig(1)) {
+        PopularMovieSource(repository)
+    }.flow.cachedIn(viewModelScope)
+
+    val tvList = Pager(PagingConfig(1)){
+        PopularTvSeriesSource(repository)
+    }.flow.cachedIn(viewModelScope)
+
+    val peopleList = Pager(PagingConfig(1)){
+        PopularPeopleSource(repository)
+    }.flow.cachedIn(viewModelScope)
+
+    val tvSimilarList = Pager(PagingConfig(1)){
+        SimilarTvSource(repository,tvId)
+    }.flow.cachedIn(viewModelScope)
+
+    val movieSimilarList = Pager(PagingConfig(1)){
+        SimilarMovieSource(repository,movieId)
+    }.flow.cachedIn(viewModelScope)
+
+    val detailsMovie = MutableLiveData<DetailsResponse>()
+    fun loadDetailsMovie(id : Int) = viewModelScope.launch {
+        loadingDetails.postValue(true)
+        try {
+            val response = repository.getMovieDetails(id)
+            if (response.isSuccessful){
+                detailsMovie.postValue(response.body())
+            } else {
+                Log.e("MovieViewModel", "LoadDetailsMovie error: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            Log.e("MovieViewModel", "LoadDetailsMovie exception: ${e.message}")
+        }
+        loadingDetails.postValue(false)
+    }
+
+    val detailsTv = MutableLiveData<TvDetailResponse>()
+    fun loadDetailsTv(id : Int) = viewModelScope.launch {
+        loadingTvDetails.postValue(true)
+        try {
+            val response = repository.getPopularTvDetails(id)
+            if (response.isSuccessful){
+                detailsTv.postValue(response.body())
+            } else {
+                Log.e("MovieViewModel", "LoadDetailsTv error: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            Log.e("MovieViewModel", "LoadDetailsTv exception: ${e.message}")
+        }
+        loadingTvDetails.postValue(false)
+    }
+}
+
+
+
+
+/*
 class MovieViewModel @Inject constructor(
     private val repository: MovieShowRepository,
     private val apiService: ApiService,
@@ -98,3 +174,5 @@ class MovieViewModel @Inject constructor(
      */
 
 }
+
+ */
