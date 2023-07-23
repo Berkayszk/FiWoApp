@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="shimmer_mask_width" format="float" />
+    <attr name="shimmer_angle" format="integer" />
+</resources>

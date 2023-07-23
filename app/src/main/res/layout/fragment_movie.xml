@@ -6,12 +6,39 @@
     android:background="@color/black">
 
 
+
 <androidx.constraintlayout.widget.ConstraintLayout
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/black"
     >
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_mask_width="0.5"
+        app:shimmer_angle="20"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+            <include layout="@layout/data_placeholder_layout" />
+            <include layout="@layout/data_placeholder_layout" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="350dp">
+            <include layout="@layout/data_placeholder_layout2" />
+            <include layout="@layout/data_placeholder_layout2" />
+            <include layout="@layout/data_placeholder_layout2" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -24,8 +51,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone" />
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,6 +68,7 @@
             android:textColor="@color/white">
         </TextView>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popularMovieRv"
             android:layout_width="match_parent"
@@ -51,7 +77,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="visible"/>
+            android:visibility="visible" >
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,15 +92,18 @@
             android:textColor="@color/white">
         </TextView>
 
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popularTvRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="visible"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,7 +114,7 @@
             android:textColor="@color/white">
         </TextView>
 
-
+        >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popularPeople"
             android:layout_width="match_parent"
@@ -91,7 +124,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="visible"/>
-
 
     </LinearLayout>
 

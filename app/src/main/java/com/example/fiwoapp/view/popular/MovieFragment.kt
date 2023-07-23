@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fiwoapp.R
 import com.example.fiwoapp.adapter.PopularMovieAdapter
@@ -16,6 +17,7 @@ import com.example.fiwoapp.databinding.FragmentMovieBinding
 import com.example.fiwoapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MovieFragment : Fragment(R.layout.fragment_movie) {
@@ -44,38 +46,51 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         setUpRv()
         loadingData()
 
+
+
+    }
+    private fun checkDataLoaded() {
+        val allDataLoaded = movieAdapter.itemCount > 0 && tvAdapter.itemCount > 0 && peopleAdapter.itemCount > 0
+        if (allDataLoaded) {
+            binding.shimmerLayout.stopShimmer()
+            binding.shimmerLayout.visibility = View.GONE
+            binding.popularMovieRv.visibility = View.VISIBLE
+            binding.popularTvRv.visibility = View.VISIBLE
+            binding.popularPeople.visibility = View.VISIBLE
+        }
     }
 
     private fun loadingData() {
         lifecycleScope.launch {
             viewModel.moviesList.collect { pagingData ->
                 movieAdapter.submitData(pagingData)
-                movieLoaded = true
-
-
+                checkDataLoaded()
             }
         }
-
         lifecycleScope.launch {
             viewModel.tvList.collect { pagingTv ->
                 tvAdapter.submitData(pagingTv)
-                tvLoaded = true
-
+                checkDataLoaded()
             }
         }
 
         lifecycleScope.launch {
             viewModel.peopleList.collect { pagingPeople ->
                 peopleAdapter.submitData(pagingPeople)
-                peopleLoaded = true
+                checkDataLoaded()
 
             }
         }
+
     }
 
 
 
+
+
     private fun setUpRv(){
+
+
         movieAdapter = PopularMovieAdapter()
         tvAdapter = PopularTvAdapter()
         peopleAdapter = PopularPeopleAdapter()
@@ -104,6 +119,8 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         _binding = null
     }
 }
+
+
 
 /*
 class MovieFragment : Fragment(R.layout.fragment_movie) {

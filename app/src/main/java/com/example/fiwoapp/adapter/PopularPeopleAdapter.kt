@@ -30,6 +30,7 @@ class PopularPeopleAdapter : PagingDataAdapter<com.example.fiwoapp.model.popular
     override fun onBindViewHolder(holder: PeopleViewHolder, position: Int) {
         val currentPeople = getItem(position)
         holder.binding.apply {
+            peopleName.text = currentPeople!!.name
             val imageLinkBackground = "${Constants.IMAGE_BASE_UR}${currentPeople!!.profile_path}"
             imageViewPoster.load(imageLinkBackground){
                 crossfade(1000)
