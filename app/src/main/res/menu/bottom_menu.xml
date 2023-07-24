@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_home"
+        android:icon="@drawable/baseline_movie_24"
+        android:title="Movies"></item>
+    <item
+        android:id="@+id/bottom_seatch"
+        android:icon="@drawable/baseline_saved_search_24"
+        android:title="Search"></item>
+    <item
+        android:id="@+id/bottom_save"
+        android:icon="@drawable/baseline_bookmarks_24"
+        android:title="Likes"></item>
+</menu>
