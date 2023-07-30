@@ -1,10 +1,12 @@
 package com.example.fiwoapp.view.popular
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -14,16 +16,24 @@ import com.example.fiwoapp.adapter.PopularMovieAdapter
 import com.example.fiwoapp.adapter.PopularPeopleAdapter
 import com.example.fiwoapp.adapter.PopularTvAdapter
 import com.example.fiwoapp.databinding.FragmentMovieBinding
+import com.example.fiwoapp.databinding.FragmentPeopleBinding
+import com.example.fiwoapp.databinding.PeopleRowBinding
+import com.example.fiwoapp.databinding.PopularTvRowBinding
 import com.example.fiwoapp.viewmodel.MovieViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.Console
 
 
 @AndroidEntryPoint
-class MovieFragment : Fragment(R.layout.fragment_movie) {
+class MovieFragment() : Fragment(R.layout.fragment_movie) {
 
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
+    private var _bindingFav: PopularTvRowBinding? = null
+    private val bindingFav get() = _bindingFav!!
+
     private val viewModel: MovieViewModel by viewModels()
     private lateinit var movieAdapter: PopularMovieAdapter
     private lateinit var tvAdapter : PopularTvAdapter
@@ -37,12 +47,18 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieBinding.inflate(layoutInflater, container, false)
+        _bindingFav = PopularTvRowBinding.inflate(layoutInflater,container,false)
         return binding.root
+
+
+
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         setUpRv()
         loadingData()
 
@@ -90,9 +106,8 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
 
     private fun setUpRv(){
 
-
-        movieAdapter = PopularMovieAdapter()
-        tvAdapter = PopularTvAdapter()
+        movieAdapter = PopularMovieAdapter(requireContext())
+        tvAdapter = PopularTvAdapter(requireContext())
         peopleAdapter = PopularPeopleAdapter()
         binding.popularMovieRv.apply {
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

@@ -14,10 +14,6 @@
         app:shimmer_duration="1000"
         app:shimmer_angle="20"
         app:shimmer_mask_width="0.5">
-
-        <!-- Buraya Shimmer effect'inin uygulanacağı tasarım bileşenlerini ekleyin -->
-        <!-- Örnek olarak, birkaç TextView veya ImageView ekleyebilirsiniz -->
-
     </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

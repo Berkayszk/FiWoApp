@@ -20,11 +20,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-
-
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 
@@ -33,11 +30,18 @@
                 android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="185dp"
-                tools:srcCompat="@tools:sample/avatars">
+                tools:srcCompat="@tools:sample/avatars"
+                >
             </ImageView>
 
-
-
+            <CheckBox
+                android:id="@+id/cbHeart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="115dp"
+                android:button="@drawable/selector_wishlist_item"
+                android:background="@drawable/checkbox_white_circle"
+                app:useMaterialThemeColors="false" />
 
         </RelativeLayout>
 
@@ -73,7 +77,6 @@
             android:text="2021"
             android:textColor="#D5D3D3"
             android:textSize="13sp" />
-
 
     </RelativeLayout>
 

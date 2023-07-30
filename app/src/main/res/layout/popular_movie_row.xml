@@ -35,6 +35,16 @@
                     tools:srcCompat="@tools:sample/avatars">
                 </ImageView>
 
+                <CheckBox
+                    android:id="@+id/cbHeart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="300dp"
+                    android:button="@drawable/selector_wishlist_item"
+                    android:background="@drawable/checkbox_white_circle"
+                    app:useMaterialThemeColors="false" />
+
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
@@ -49,6 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@color/black"></ImageView>
+
 
                 </androidx.cardview.widget.CardView>
 

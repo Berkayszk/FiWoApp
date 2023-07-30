@@ -97,7 +97,7 @@ class TvSeriesDetails : Fragment(R.layout.fragment_tv_series_details) {
 
     }
     private fun similarTvRv(){
-        similarTvAdapter = SimilarTvAdapter()
+        similarTvAdapter = SimilarTvAdapter(requireContext())
         binding.similarTvRv.apply {
             adapter = similarTvAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

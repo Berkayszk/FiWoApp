@@ -1,7 +1,9 @@
 package com.example.fiwoapp.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -12,9 +14,10 @@ import com.example.fiwoapp.model.populartv.Result
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.view.popular.MovieFragmentDirections
 
-class PopularTvAdapter : PagingDataAdapter<com.example.fiwoapp.model.populartv.Result, PopularTvAdapter.PopularTvHolder>(diffCallback) {
+class PopularTvAdapter(private val context: Context) : PagingDataAdapter<com.example.fiwoapp.model.populartv.Result, PopularTvAdapter.PopularTvHolder>(diffCallback) {
 
     private val movieId : Int = 0
+
     class PopularTvHolder(val binding : PopularTvRowBinding) : ViewHolder(binding.root)
 
     companion object{
@@ -52,6 +55,19 @@ class PopularTvAdapter : PagingDataAdapter<com.example.fiwoapp.model.populartv.R
         holder.itemView.setOnClickListener {
             val direction = MovieFragmentDirections.actionMovieFragmentToTvSeriesDetails(currentItem!!.id)
             it.findNavController().navigate(direction)
+        }
+        holder.binding.cbHeart.setOnCheckedChangeListener { checkBox, isChecked ->
+
+            if (isChecked)
+            {
+                println("checked")
+                Toast.makeText(context,"The Movie Added Favorite..", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                println("checked else")
+                Toast.makeText(context,"The Movie Removed Favorite..", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }
