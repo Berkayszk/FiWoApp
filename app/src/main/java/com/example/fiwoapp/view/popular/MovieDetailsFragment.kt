@@ -1,10 +1,12 @@
 package com.example.fiwoapp.view.popular
 
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -13,11 +15,16 @@ import coil.load
 import coil.size.Scale
 import com.example.fiwoapp.adapter.SimilarMovieAdapter
 import com.example.fiwoapp.databinding.FragmentMovieDetailsBinding
+import com.example.fiwoapp.entity.TrailerEntity
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.viewmodel.MovieViewModel
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.loadOrCueVideo
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
@@ -25,6 +32,9 @@ class MovieDetailsFragment : Fragment() {
     private var _binding : FragmentMovieDetailsBinding?=null
     private val binding get() = _binding!!
     private var movieId = 0
+    private lateinit var movieDetailBinding : FragmentMovieDetailsBinding
+    private lateinit var youtubeKey: String
+    private lateinit var videoId: String
     private val viewModel: MovieViewModel by viewModels()
     private val args : MovieDetailsFragmentArgs by navArgs()
     private lateinit var similarMovieAdapter : SimilarMovieAdapter
@@ -47,7 +57,11 @@ class MovieDetailsFragment : Fragment() {
             viewModel.loadDetailsMovie(movieId)
         }
         viewModel.setMovieId(movieId)
+
+        viewModel.getMovieTrail(videoId)
+
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,7 +69,22 @@ class MovieDetailsFragment : Fragment() {
         similarMovieRv()
         loadingSimilarData()
         showData()
+    }
 
+
+    private fun playTrailer(data: TrailerEntity) {
+        youtubeKey = data.key
+
+        val youTubePlayerView = YouTubePlayerView(requireContext())
+        movieDetailBinding.youtubePlayerView.addView(youTubePlayerView)
+        lifecycle.addObserver(youTubePlayerView)
+        youTubePlayerView.addYouTubePlayerListener(object :
+            AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.loadOrCueVideo(lifecycle, youtubeKey, 0f)
+
+            }
+        })
 
     }
     private fun showData(){
@@ -109,7 +138,6 @@ class MovieDetailsFragment : Fragment() {
                 similarMovieAdapter.submitData(pagingData)
             }
         }
-
     }
 
     override fun onDestroy() {

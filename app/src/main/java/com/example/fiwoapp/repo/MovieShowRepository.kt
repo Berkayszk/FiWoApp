@@ -1,14 +1,19 @@
 package com.example.fiwoapp.repo
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.fiwoapp.MovieDataSource
 import com.example.fiwoapp.api.ApiService
+import com.example.fiwoapp.entity.TrailerEntity
+import com.example.fiwoapp.model.movietrail.MovieTrailResponse
 import com.example.fiwoapp.paging.PopularMovieSource
 import com.example.fiwoapp.util.Constants.API_KEY
 import com.example.fiwoapp.viewmodel.MovieViewModel
+import com.example.fiwoapp.vo.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -37,5 +42,8 @@ class MovieShowRepository @Inject constructor(val apiService : ApiService){
 
    suspend fun getMovieSimilar(page: Int,movieId: Int) = apiService.getMovieSimilar(page,movieId)
    suspend fun getTvSimilar(page: Int,tvId: Int) = apiService.getSimilarTv(page,tvId)
+
+   suspend fun getTrailerVideo(videoId:String) = apiService.getMovieTrailer(videoId, API_KEY)
+
 
 }

@@ -9,12 +9,15 @@ import androidx.paging.*
 import com.example.fiwoapp.adapter.SimilarMovieAdapter
 import com.example.fiwoapp.adapter.SimilarTvAdapter
 import com.example.fiwoapp.api.ApiService
+import com.example.fiwoapp.entity.TrailerEntity
 import com.example.fiwoapp.model.moviedetail.DetailsResponse
+import com.example.fiwoapp.model.movietrail.MovieTrailResponse
 import com.example.fiwoapp.model.popularmovie.PopularResponse
 import com.example.fiwoapp.model.popularmovie.Result
 import com.example.fiwoapp.model.tvdetail.TvDetailResponse
 import com.example.fiwoapp.paging.*
 import com.example.fiwoapp.repo.MovieShowRepository
+import com.example.fiwoapp.vo.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -31,6 +34,7 @@ class MovieViewModel @Inject constructor(
     private var tvId : Int = 0
     val loadingDetails = MutableLiveData<Boolean>()
     val loadingTvDetails = MutableLiveData<Boolean>()
+    val loadingMovieTrail = MutableLiveData<Boolean>()
 
     fun setMovieId(Id : Int){
         movieId = Id
@@ -90,6 +94,24 @@ class MovieViewModel @Inject constructor(
         }
         loadingTvDetails.postValue(false)
     }
+
+    val movieTrail = MutableLiveData<MovieTrailResponse>()
+    fun getMovieTrail(videoId : String) = viewModelScope.launch {
+        loadingMovieTrail.postValue(true)
+        try {
+            val response = repository.getTrailerVideo(videoId)
+            if (response.isSuccessful){
+                movieTrail.postValue(response.body())
+            } else {
+                Log.e("MovieViewModel", "LoadDetailsTv error: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            Log.e("MovieViewModel", "LoadDetailsTv exception: ${e.message}")
+        }
+        loadingMovieTrail.postValue(false)
+    }
+
+
 }
 
 

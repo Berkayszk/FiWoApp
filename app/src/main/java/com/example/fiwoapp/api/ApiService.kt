@@ -1,6 +1,7 @@
 package com.example.fiwoapp.api
 
 import com.example.fiwoapp.model.moviedetail.DetailsResponse
+import com.example.fiwoapp.model.movietrail.MovieTrailResponse
 import com.example.fiwoapp.model.popularmovie.PopularResponse
 import com.example.fiwoapp.model.popularpeople.PopularPeopleResponse
 import com.example.fiwoapp.model.populartv.PopularTvResponse
@@ -9,6 +10,7 @@ import com.example.fiwoapp.model.similartv.SimilarTvResponse
 import com.example.fiwoapp.model.tvdetail.TvDetailResponse
 import com.example.fiwoapp.util.Constants
 import com.example.fiwoapp.util.Constants.API_KEY
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -70,4 +72,19 @@ interface ApiService {
         @Path("person_id") movieId: Int,
         @Query("api_key") apiKey: String = Constants.API_KEY
     ): Response<TvDetailResponse>
+
+    @GET("movie/{id}/videos")
+    fun getMovieTrailer(
+        @Path("id") id: String,
+        @Query("api_key") apiKey: String,
+    ): Response<MovieTrailResponse>
+
+    /*
+    @GET("tv/{id}/videos")
+    fun getTvTrailer(
+        @Path("id") id: String,
+        @Query("api_key") apiKey: String,
+    ): Call<ResponseTvTrailer>
+
+     */
 }

@@ -38,7 +38,7 @@ android {
         viewBinding true
     }
 }
-
+var room_version = "2.5.2"
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
@@ -91,6 +91,15 @@ dependencies {
 
     //Shimmer effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //Youtube Player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
+
+    //Room
+
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
 }
 kapt {
     correctErrorTypes = true
