@@ -73,7 +73,8 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="10dp"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:visibility="gone">
         </TextView>
 
 
@@ -91,13 +92,15 @@
 
 
         <TextView
+            android:id="@+id/popularTvSeriesTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Popular Tv Series"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="10dp"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:visibility="gone">
         </TextView>
 
 
@@ -113,13 +116,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/actorsTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Best of Actors"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="10dp"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:visibility="gone">
         </TextView>
 
         >

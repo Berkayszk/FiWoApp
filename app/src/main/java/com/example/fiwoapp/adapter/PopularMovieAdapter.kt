@@ -59,7 +59,7 @@ PopularMovieAdapter(private val context : Context) : PagingDataAdapter<com.examp
                         MovieFragmentDirections.actionMovieFragmentToMovieDetailsFragment(currentItem.id)
                     it.findNavController().navigate(direction)
 
-                    println("PopularMovieAdapter Clicked movie id: ${currentItem?.id}")
+                    //println("PopularMovieAdapter Clicked movie id: ${currentItem?.id}")
                 }
                 holder.binding.cbHeart.setOnCheckedChangeListener { checkBox, isChecked ->
 

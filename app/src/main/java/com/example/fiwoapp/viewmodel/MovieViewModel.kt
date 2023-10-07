@@ -27,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val repository: MovieShowRepository,
-    private val apiService: ApiService,
+    private val apiService: ApiService
+
 ) : ViewModel() {
 
     private var movieId: Int = 0
